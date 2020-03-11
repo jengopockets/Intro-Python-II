@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -38,6 +39,11 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+while True:
+    cmd = input("What is your name adventurer? \n")
+    player = Player(cmd,room['outside'])
+    print(player)
+    break
 
 # Write a loop that:
 #
@@ -49,3 +55,41 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+while True:
+    cmd = input("->")
+    current_room = player.current_room
+
+    if cmd == "q":
+        print("Goodbye scardy cat!")
+        break
+    elif cmd == "n":
+        if current_room.n_to == None:
+            print(f'You hit a wall {player.name}')
+        else:
+            player.current_room = current_room.n_to
+            print("You move North")
+            print(current_room.n_to)
+    elif cmd == "s":
+        if current_room.s_to == None:
+            print(f'You hit a wall {player.name}')
+        else:
+            player.current_room = current_room.s_to
+            print("You move South")
+            print(current_room.s_to)
+    elif cmd == "e":
+        if current_room.e_to == None:
+            print(f'You hit a wall {player.name}')
+        else:
+            player.current_room = current_room.e_to
+            print("You move East")
+            print(current_room.e_to)
+    elif cmd == "w":
+        if current_room.w_to == None:
+            print(f'You hit a wall {player.name}')
+        else:
+            player.current_room = current_room.w_to
+            print("You move West")
+            print(current_room.w_to)
+    else:
+        print("ERROR: Valid Commands are n for north, s for south, e for east, w for west, or q for quit")
+    
